@@ -24,7 +24,7 @@
         </div>
       </div>
       <SimpleNote
-        v-for="note in notes"
+        v-for="note in storeNotes.notes"
         :key="note.id"
         :note="note"
         @deleteClicked="deleteNote"
@@ -35,28 +35,14 @@
 <script setup>
 import { ref } from "vue";
 import SimpleNote from "@/components/SimpleNote.vue";
+import { useStoreNotes } from "@/stores/storeNotes";
 
 const newNote = ref("");
 const newNoteRef = ref(null);
 
-const notes = ref([
-  {
-    id: "id1",
-    content:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem ipsa          commodi sint ut ullam culpa nulla molestiae sunt quia qui maxime, enim         quasi officiis aperiam fugit, corrupti omnis, eaque animi.",
-  },
-  {
-    id: "id2",
-    content: "Short note!",
-  },
-]);
-
+const storeNotes = useStoreNotes();
 const addNote = () => {
-  let note = {
-    id: Date.now(),
-    content: newNote.value,
-  };
-  notes.value.unshift(note);
+  storeNotes.addNote(newNote.value);
   newNote.value = "";
   newNoteRef.value.focus();
 };
