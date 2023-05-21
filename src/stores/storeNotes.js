@@ -25,5 +25,31 @@ export const useStoreNotes = defineStore("storeNotes", {
       };
       this.notes.unshift(note); // затратный метод, лучшеп переписать на push, и попытаться отрисосывать с конца масива мб
     },
+    deleteNote(idToDelete) {
+      this.notes = this.notes.filter((note) => {
+        return note.id !== idToDelete;
+      });
+    },
+    updateNote(id, content) {
+      let index = this.notes.findIndex((note) => note.id === id);
+      this.notes[index].content = content;
+    },
+  },
+  getters: {
+    getNoteContent: (state) => {
+      return (id) => {
+        return state.notes.filter((note) => note.id === id)[0].content;
+      };
+    },
+    totalNotesCount: (state) => {
+      return state.notes.length;
+    },
+    totalCharactersCount: (state) => {
+      let count = 0;
+      state.notes.forEach((note) => {
+        count += note.content.length;
+      });
+      return count;
+    },
   },
 });
