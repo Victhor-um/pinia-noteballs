@@ -1,17 +1,20 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-
+import { v4 as uuidv4 } from "uuid";
+function generateId() {
+  return uuidv4();
+}
 export const useStoreNotes = defineStore("storeNotes", {
   state: () => {
     return {
       notes: [
         {
-          id: "id1",
+          id: generateId(),
           content:
             "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem ipsa          commodi sint ut ullam culpa nulla molestiae sunt quia qui maxime, enim         quasi officiis aperiam fugit, corrupti omnis, eaque animi.",
         },
         {
-          id: "id2",
+          id: generateId(),
           content: "Short note!",
         },
       ],
@@ -20,7 +23,7 @@ export const useStoreNotes = defineStore("storeNotes", {
   actions: {
     addNote(newNoteContent) {
       let note = {
-        id: Date.now(),
+        id: this.generateId(),
         content: newNoteContent,
       };
       this.notes.unshift(note); // затратный метод, лучшеп переписать на push, и попытаться отрисосывать с конца масива мб
@@ -33,6 +36,9 @@ export const useStoreNotes = defineStore("storeNotes", {
     updateNote(id, content) {
       let index = this.notes.findIndex((note) => note.id === id);
       this.notes[index].content = content;
+    },
+    generateId() {
+      return uuidv4();
     },
   },
   getters: {

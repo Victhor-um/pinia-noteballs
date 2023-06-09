@@ -1,6 +1,11 @@
 <template>
   <div class="edit-note">
-    <AddEditNote v-model="noteContent" bgColor="link" ref="addEditNoteRef">
+    <AddEditNote
+      :modelValue="noteContent"
+      @update:modelValue="noteContent = $event"
+      bgColor="link"
+      ref="addEditNoteRef"
+    >
       <template #buttons>
         <button @click="$router.back()" class="button is-link is-light mr-2">
           Cancel
