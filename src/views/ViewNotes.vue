@@ -15,12 +15,7 @@
         </button>
       </template>
     </AddEditNote>
-    <SimpleNote
-      v-for="note in storeNotes.notes"
-      :key="note.id"
-      :note="note"
-      @deleteClicked="deleteNote"
-    />
+    <SimpleNote v-for="note in storeNotes.notes" :key="note.id" :note="note" />
   </div>
 </template>
 <script setup>
@@ -38,10 +33,6 @@ const addNote = () => {
   storeNotes.addNote(newNote.value);
   newNote.value = "";
   addEditNoteRef.value.focusTextarea();
-};
-
-const deleteNote = (noteId) => {
-  storeNotes.deleteNote(noteId);
 };
 </script>
 
