@@ -48,7 +48,7 @@ defineProps({
 defineEmits(["update:modelValue"]);
 
 const handleInput = (event, $emit) => {
-  $emit("update:modelValue", event.target.value);
+  $emit("update:modelValue", event.target.value.trim());
 };
 
 const textareaRef = ref(null);
@@ -60,6 +60,8 @@ const focusTextarea = () => {
 defineExpose({
   focusTextarea,
 });
+
+
 </script>
 
 <style lang="scss" scoped></style>
