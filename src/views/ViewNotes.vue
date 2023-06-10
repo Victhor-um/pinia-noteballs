@@ -15,7 +15,11 @@
         </button>
       </template>
     </AddEditNote>
-    <SimpleNote v-for="note in storeNotes.notes" :key="note.id" :note="note" />
+    <SimpleNote
+      v-for="note in storeNotes.notes.toReversed()"
+      :key="note.id"
+      :note="note"
+    />
   </div>
 </template>
 <script setup>
